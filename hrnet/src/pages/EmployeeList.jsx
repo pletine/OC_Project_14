@@ -1,34 +1,35 @@
+import "./employeeList.scss";
 import * as React from "react";
 import { Link } from "react-router-dom";
+import DataTable from "../components/DataTable";
 
 export default function EmployeeList() {
-  const getEmployees = () => {
-    // const employees = JSON.parse(localStorage.getItem("employees"));
+  const employees = JSON.parse(localStorage.getItem("employees"));
 
-    return "Bonjour";
+  if (employees === null) {
+    return (
+      <div id="employee-div" className="container">
+        <h1>Current Employees</h1>
+        <p>No employees to display</p>
+        <Link to="/">Home</Link>
+      </div>
+    );
+  } else {
+    return (
+      <div id="employee-div" className="container">
+        <h1>Current Employees</h1>
 
-    // {
-    //   data: employees,
-    //   columns: [
-    //     { title: "First Name", data: "firstName" },
-    //     { title: "Last Name", data: "lastName" },
-    //     { title: "Start Date", data: "startDate" },
-    //     { title: "Department", data: "department" },
-    //     { title: "Date of Birth", data: "dateOfBirth" },
-    //     { title: "Street", data: "street" },
-    //     { title: "City", data: "city" },
-    //     { title: "State", data: "state" },
-    //     { title: "Zip Code", data: "zipCode" },
-    //   ],
-    // };
-  };
+        <button
+          onClick={() => {
+            localStorage.clear("employees");
+          }}
+        >
+          Effacer les données
+        </button>
 
-  return (
-    <div id="employee-div" className="container">
-      <h1>Current Employees</h1>
-      <table id="employee-table" className="display"></table>
-      {getEmployees()}
-      <Link to="/">Home</Link>
-    </div>
-  );
+        <DataTable dataInput={employees} />
+        <Link to="/">Home</Link>
+      </div>
+    );
+  }
 }
