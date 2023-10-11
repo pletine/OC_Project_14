@@ -2,11 +2,17 @@ import "./employeeList.scss";
 import * as React from "react";
 import { Link } from "react-router-dom";
 import DataTable from "../components/DataTable";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteAll } from "../store.js";
+import { useState } from "react";
 
 export default function EmployeeList() {
-  const employees = JSON.parse(localStorage.getItem("employees"));
+  const dispatch = useDispatch();
+  const employees = useSelector((state) => state.employees);
 
-  if (employees === null) {
+  const [employeesState, setEmployeesState] = useState(employees);
+
+  if (employeesState === null) {
     return (
       <div id="employee-div" className="container">
         <h1>Current Employees</h1>
@@ -21,13 +27,14 @@ export default function EmployeeList() {
 
         <button
           onClick={() => {
-            localStorage.clear("employees");
+            dispatch(deleteAll());
+            setEmployeesState(null);
           }}
         >
           Effacer les données
         </button>
 
-        <DataTable dataInput={employees} />
+        <DataTable dataInput={employeesState} />
         <Link to="/">Home</Link>
       </div>
     );

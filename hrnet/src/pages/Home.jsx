@@ -1,35 +1,26 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import Modal from "pierreletine-modal";
+import { useDispatch } from "react-redux";
+import { addUser } from "../store.js";
 
 export default function Home() {
   const [modal, setModal] = useState(false);
+  const dispatch = useDispatch();
 
   const saveEmployee = () => {
-    const firstName = document.getElementById("first-name");
-    const lastName = document.getElementById("last-name");
-    const dateOfBirth = document.getElementById("date-of-birth");
-    const startDate = document.getElementById("start-date");
-    const department = document.getElementById("department");
-    const street = document.getElementById("street");
-    const city = document.getElementById("city");
-    const state = document.getElementById("state");
-    const zipCode = document.getElementById("zip-code");
-
-    const employees = JSON.parse(localStorage.getItem("employees")) || [];
     const employee = {
-      firstName: firstName.value,
-      lastName: lastName.value,
-      dateOfBirth: dateOfBirth.value,
-      startDate: startDate.value,
-      department: department.value,
-      street: street.value,
-      city: city.value,
-      state: state.value,
-      zipCode: zipCode.value,
+      firstName: document.getElementById("first-name").value,
+      lastName: document.getElementById("last-name").value,
+      dateOfBirth: document.getElementById("date-of-birth").value,
+      startDate: document.getElementById("start-date").value,
+      department: document.getElementById("department").value,
+      street: document.getElementById("street").value,
+      city: document.getElementById("city").value,
+      state: document.getElementById("state").value,
+      zipCode: document.getElementById("zip-code").value,
     };
-    employees.push(employee);
-    localStorage.setItem("employees", JSON.stringify(employees));
+    dispatch(addUser(employee));
     setModal(true);
   };
 
