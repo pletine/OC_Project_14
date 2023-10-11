@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import Modal from "../components/Modal";
 import { useState } from "react";
+import Modal from "pierreletine-modal";
 
 export default function Home() {
   const [modal, setModal] = useState(false);
