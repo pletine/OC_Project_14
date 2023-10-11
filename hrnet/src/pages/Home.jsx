@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
+import Modal from "../components/Modal";
+import { useState } from "react";
 
 export default function Home() {
+  const [modal, setModal] = useState(false);
+
   const saveEmployee = () => {
     const firstName = document.getElementById("first-name");
     const lastName = document.getElementById("last-name");
@@ -26,9 +30,7 @@ export default function Home() {
     };
     employees.push(employee);
     localStorage.setItem("employees", JSON.stringify(employees));
-
-    alert("Save Employee Clicked");
-    // $("#confirmation").modal();
+    setModal(true);
   };
 
   return (
@@ -134,9 +136,11 @@ export default function Home() {
 
         <button onClick={saveEmployee}>Save</button>
       </div>
-      <div id="confirmation" className="modal">
-        Employee Created!
-      </div>
+
+      <Modal onClose={() => setModal(false)} show={modal}>
+        <h2>Inscription succeeded !</h2>
+        <p>Employee Created!</p>
+      </Modal>
     </div>
   );
 }
