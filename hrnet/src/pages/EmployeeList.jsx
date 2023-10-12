@@ -12,7 +12,7 @@ export default function EmployeeList() {
 
   const [employeesState, setEmployeesState] = useState(employees);
 
-  if (employeesState === null) {
+  if (employeesState === null || employeesState.length === 0) {
     return (
       <div id="employee-div" className="container">
         <h1>Current Employees</h1>

@@ -1,3 +1,4 @@
+import "./home.scss";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import Modal from "pierreletine-modal";

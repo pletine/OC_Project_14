@@ -11,7 +11,7 @@ const employees = createSlice({
 
         deleteAll: (state, action) => {
             // {type : 'delete_all_user', payload: null}
-            state = [];
+            return [];
         },
     }
 });
