@@ -25,6 +25,31 @@
         padding: 0 1rem;
         padding-bottom: 1rem;
         border-radius: 20px;
-    }    
+    }
+
+    input {
+        border-radius: 5px;
+    }
+
+    /* Style for input validation */
+    .input_valid {
+        border: 2px solid #004d05 !important;
+    }
+
+    .input_error {
+        border: 2px solid #5c0009 !important;
+    }
+
+    .error_message {
+        color: #7c000c;
+        background-color: #fcdede;
+        display: block;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+        font-family: Roboto, sans-serif;
+        padding: 10px;
+        line-height: 30px !important;
+    }
 }
 

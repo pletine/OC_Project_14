@@ -1,28 +1,52 @@
 import "./home.scss";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useId } from "react";
 import Modal from "pierreletine-modal";
 import { useDispatch } from "react-redux";
 import { addUser } from "../store.js";
+import formValidation from "../scripts/formValidation.js";
 
 export default function Home() {
   const [modal, setModal] = useState(false);
   const dispatch = useDispatch();
 
+  const firstName = useId();
+  const lastName = useId();
+  const dateOfBirth = useId();
+  const startDate = useId();
+  const department = useId();
+  const street = useId();
+  const city = useId();
+  const state = useId();
+  const zipCode = useId();
+
   const saveEmployee = () => {
-    const employee = {
-      firstName: document.getElementById("first-name").value,
-      lastName: document.getElementById("last-name").value,
-      dateOfBirth: document.getElementById("date-of-birth").value,
-      startDate: document.getElementById("start-date").value,
-      department: document.getElementById("department").value,
-      street: document.getElementById("street").value,
-      city: document.getElementById("city").value,
-      state: document.getElementById("state").value,
-      zipCode: document.getElementById("zip-code").value,
-    };
-    dispatch(addUser(employee));
-    setModal(true);
+    const firstNameElement = document.getElementById(firstName);
+    const lastNameElement = document.getElementById(lastName);
+    const dateOfBirthElement = document.getElementById(dateOfBirth);
+    const startDateElement = document.getElementById(startDate);
+    const departmentElement = document.getElementById(department);
+    const streetElement = document.getElementById(street);
+    const cityElement = document.getElementById(city);
+    const stateElement = document.getElementById(state);
+    const zipCodeElement = document.getElementById(zipCode);
+
+    let { valid, employee } = formValidation({
+      firstNameElement,
+      lastNameElement,
+      dateOfBirthElement,
+      startDateElement,
+      departmentElement,
+      streetElement,
+      cityElement,
+      stateElement,
+      zipCodeElement,
+    });
+
+    if (valid) {
+      dispatch(addUser(employee));
+      setModal(true);
+    }
   };
 
   return (
@@ -34,29 +58,29 @@ export default function Home() {
         <Link to="/employees">View Current Employees</Link>
         <h2>Create Employee</h2>
         <form action="#" id="create-employee">
-          <label htmlFor="first-name">First Name</label>
-          <input type="text" id="first-name" />
+          <label htmlFor={firstName}>First Name</label>
+          <input type="text" id={firstName} />
 
-          <label htmlFor="last-name">Last Name</label>
-          <input type="text" id="last-name" />
+          <label htmlFor={lastName}>Last Name</label>
+          <input type="text" id={lastName} />
 
-          <label htmlFor="date-of-birth">Date of Birth</label>
-          <input id="date-of-birth" type="date" name="date-of-birth" />
+          <label htmlFor={dateOfBirth}>Date of Birth</label>
+          <input id={dateOfBirth} type="date" name="last-name" />
 
-          <label htmlFor="start-date">Start Date</label>
-          <input id="start-date" type="date" name="start-date" />
+          <label htmlFor={startDate}>Start Date</label>
+          <input id={startDate} type="date" name="start-date" />
 
           <fieldset className="address">
             <legend>Address</legend>
 
-            <label htmlFor="street">Street</label>
-            <input id="street" type="text" />
+            <label htmlFor={street}>Street</label>
+            <input id={street} type="text" />
 
-            <label htmlFor="city">City</label>
-            <input id="city" type="text" />
+            <label htmlFor={city}>City</label>
+            <input id={city} type="text" />
 
-            <label htmlFor="state">State</label>
-            <select name="state" id="state">
+            <label htmlFor={state}>State</label>
+            <select name="state" id={state}>
               <option value="">-- Select State --</option>
               <option value="AL">Alabama (AL)</option>
               <option value="AK">Alaska (AK)</option>
@@ -111,12 +135,12 @@ export default function Home() {
               <option value="WY">Wyoming (WY)</option>
             </select>
 
-            <label htmlFor="zip-code">Zip Code</label>
-            <input id="zip-code" type="number" />
+            <label htmlFor={zipCode}>Zip Code</label>
+            <input id={zipCode} type="number" />
           </fieldset>
 
-          <label htmlFor="department">Department</label>
-          <select name="department" id="department">
+          <label htmlFor={department}>Department</label>
+          <select name="department" id={department}>
             <option value="">-- Select Working Department --</option>
             <option value="Sales">Sales</option>
             <option value="Marketing">Marketing</option>
