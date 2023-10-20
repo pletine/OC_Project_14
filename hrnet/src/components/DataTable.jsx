@@ -1,147 +1,67 @@
-import "./dataTable.scss";
 import { useMemo } from "react";
-import {
-  useFilters,
-  useSortBy,
-  useTable,
-  usePagination,
-  useGlobalFilter,
-} from "react-table";
+import { MaterialReactTable } from "material-react-table";
+import "./dataTable.scss";
 
 export default function DataTable({ dataInput }) {
-  const data = useMemo(() => dataInput, [dataInput]);
   const columns = useMemo(
     () => [
       {
-        Header: "First Name",
-        accessor: "firstName",
+        header: "First Name",
+        accessorKey: "firstName",
+        size: 200,
       },
       {
-        Header: "Last Name",
-        accessor: "lastName",
+        header: "Last Name",
+        accessorKey: "lastName",
+        size: 200,
       },
       {
-        Header: "Start Date",
-        accessor: "startDate",
+        header: "Start Date",
+        accessorKey: "startDate",
+        size: 200,
       },
       {
-        Header: "Department",
-        accessor: "department",
+        header: "Department",
+        accessorKey: "department",
+        size: 200,
       },
       {
-        Header: "Date of Birth",
-        accessor: "dateOfBirth",
+        header: "Date of Birth",
+        accessorKey: "dateOfBirth",
+        size: 200,
       },
       {
-        Header: "Street",
-        accessor: "street",
+        header: "Street",
+        accessorKey: "street",
+        size: 200,
       },
       {
-        Header: "City",
-        accessor: "city",
+        header: "City",
+        accessorKey: "city",
+        size: 200,
       },
       {
-        Header: "State",
-        accessor: "state",
+        header: "State",
+        accessorKey: "state",
+        size: 200,
       },
       {
-        Header: "Zip Code",
-        accessor: "zipCode",
+        header: "Zip Code",
+        accessorKey: "zipCode",
+        size: 200,
       },
     ],
     []
   );
 
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    page,
-    prepareRow,
-    state: { pageIndex, pageSize, globalFilter },
-    setGlobalFilter,
-  } = useTable(
-    { columns, data, initialState: { pageIndex: 0, pageSize: 10 } },
-    useFilters,
-    useGlobalFilter,
-    useSortBy,
-    usePagination
-  );
-
-  const pageCount = page.length; // state.pageCount; // Obtenez pageCount depuis l'état
-  const onChangePageSize = (e) => {
-    setPageSize(Number(e.target.value));
-  };
-
-  const goToPage = (pageIndex) => {
-    // Utilisez setPage pour aller à la page souhaitée
-    setGlobalFilter("");
-  };
-
-  const previousPage = () => {
-    if (pageIndex > 0) {
-      goToPage(pageIndex - 1);
-    }
-  };
-
-  const nextPage = () => {
-    if (pageIndex < pageCount - 1) {
-      goToPage(pageIndex + 1);
-    }
-  };
-
   return (
     <div id="employee-table" className="display">
-      <input
-        type="text"
-        placeholder="Recherche"
-        // onChange={(e) => setGlobalFilter(e.target.value)}
+      <MaterialReactTable
+        columns={columns}
+        data={dataInput}
+        enableColumnActions={false}
+        enableColumnFilters={false}
       />
-      <table {...getTableProps()}>
-        <thead>
-          {headerGroups.map((headerGroups) => (
-            <tr {...headerGroups.getHeaderGroupProps()}>
-              {headerGroups.headers.map((column) => (
-                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                  {column.render("Header")}
-                  <span>
-                    {column.isSorted ? (column.isSortedDesc ? "▼" : "▲") : ""}
-                  </span>
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {page.map((row) => {
-            prepareRow(row);
-            return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map((cell) => (
-                  <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                ))}
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-      <div>
-        <button onClick={() => previousPage()} disabled={pageIndex === 0}>
-          Précedent
-        </button>
-        <span>
-          Page{" "}
-          <strong>
-            {pageIndex + 1} / {pageOptions.length}
-          </strong>{" "}
-        </span>
-        <button
-          onClick={() => nextPage()}
-          disabled={pageIndex >= pageCount - 1}
-        >
-          Suivant
-        </button>
-      </div>
     </div>
   );
 }
