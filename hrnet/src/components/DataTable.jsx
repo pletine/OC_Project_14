@@ -2,6 +2,11 @@ import { useMemo } from "react";
 import { MaterialReactTable } from "material-react-table";
 import "./dataTable.scss";
 
+/**
+ * Create the DataTable element view with the data in parameter
+ * @param {Object} dataInput - contains the employee data (firstName, lastName, startDate, department, dateOfBirth, street, city, state, zipCode)
+ * @returns {JSX.Element}
+ */
 export default function DataTable({ dataInput }) {
   const columns = useMemo(
     () => [

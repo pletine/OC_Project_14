@@ -6,6 +6,10 @@ import { useDispatch } from "react-redux";
 import { addUser } from "../store.js";
 import formValidation from "../scripts/formValidation.js";
 
+/**
+ * Home page
+ * @returns {JSX.Element}
+ */
 export default function Home() {
   const [modal, setModal] = useState(false);
   const dispatch = useDispatch();
@@ -20,6 +24,14 @@ export default function Home() {
   const state = useId();
   const zipCode = useId();
 
+  /**
+   * Save the employee in the store
+   * Get the information from the form
+   * Check if the values are valid
+   * If valid, dispatch the action to add the employee
+   * Else, validation function ask to correct the inputs
+   * @returns {void}
+   */
   const saveEmployee = () => {
     const firstNameElement = document.getElementById(firstName);
     const lastNameElement = document.getElementById(lastName);

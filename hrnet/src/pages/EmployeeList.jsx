@@ -6,6 +6,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteAll } from "../store.js";
 import { useState } from "react";
 
+/**
+ * List of employees page
+ * Use DataTable element to print the list of employees and their data
+ * Get data from the Redux store
+ * @returns {JSX.Element}
+ */
 export default function EmployeeList() {
   const dispatch = useDispatch();
   const employees = useSelector((state) => state.employees);

@@ -54,8 +54,7 @@ function printErrorMessage(element, texte) {
  * @param {Element valid under which the text must be hide} element 
  */
 function hideErrorMessage(element) {
-    const parentElement = element.parentNode;
-    let errorMessage = parentElement.querySelector('.error_message');
+    let errorMessage = document.getElementById('error_message' + element.id);
 
     if (errorMessage) {
         errorMessage.style.display = 'none';
@@ -91,6 +90,12 @@ function checkName(element) {
     return retValue;
 }
 
+/**
+ * checkIfNotEmpty 
+ * Check if a string is empty
+ * @param {string input} element - html input element
+ * @returns {boolean} - true if the string is not empty, else false
+*/
 function checkIfNotEmpty(element) {
     let retValue = true;
     let inputText = element.value;
@@ -108,6 +113,12 @@ function checkIfNotEmpty(element) {
     return retValue;
 }
 
+/**
+ * Check the values from the form
+ * Show error messages if the values are not correct
+ * @param {Object} listInputs - list of values from the form
+ * @returns 
+ */
 export default function formValidation(listInputs) {
     let valid = true;
 
