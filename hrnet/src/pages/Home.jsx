@@ -43,19 +43,32 @@ export default function Home() {
     const stateElement = document.getElementById(state);
     const zipCodeElement = document.getElementById(zipCode);
 
-    let { valid, employee } = formValidation({
-      firstNameElement,
-      lastNameElement,
-      dateOfBirthElement,
-      startDateElement,
-      departmentElement,
-      streetElement,
-      cityElement,
-      stateElement,
-      zipCodeElement,
-    });
+    let valid = formValidation([
+      { element: firstNameElement, type: "name" },
+      { element: lastNameElement, type: "name" },
+      { element: dateOfBirthElement, type: "date" },
+      { element: startDateElement, type: "date" },
+      { element: departmentElement, type: "value" },
+      { element: streetElement, type: "name" },
+      { element: cityElement, type: "name" },
+      { element: stateElement, type: "value" },
+      { element: zipCodeElement, type: "value" },
+    ]);
 
     if (valid) {
+      // Save employee
+      const employee = {
+        firstName: firstNameElement.value,
+        lastName: lastNameElement.value,
+        dateOfBirth: dateOfBirthElement.value,
+        startDate: startDateElement.value,
+        department: departmentElement.value,
+        street: streetElement.value,
+        city: cityElement.value,
+        state: stateElement.value,
+        zipCode: zipCodeElement.value,
+      };
+
       dispatch(addUser(employee));
       setModal(true);
     }

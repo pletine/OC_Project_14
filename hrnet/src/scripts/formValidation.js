@@ -1,3 +1,9 @@
+/**
+ * Add an element to print the error message under the input
+ * Use insertBefore function to print it before the next element / input
+ * @param {Node} referenceNode 
+ * @param {Node} newNode 
+ */
 function insertAfter(referenceNode, newNode) {
     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
 }
@@ -123,29 +129,24 @@ export default function formValidation(listInputs) {
     let valid = true;
 
     // Check Values of inputs
-    valid &= checkName(listInputs["firstNameElement"]);
-    valid &= checkName(listInputs["lastNameElement"]);
+    listInputs.forEach(input => {
+        switch(input.type) {
+            case "text":
+                valid &= checkIfNotEmpty(input.element);
+                break;
+            case "name":
+                valid &= checkName(input.element);
+                break;
+            case "date":
+                valid &= checkIfNotEmpty(input.element);
+                break;
+            case "value":
+                valid &= checkIfNotEmpty(input.element);
+                break;
+            default:
+                break;
+        }
+    });
 
-    valid &= checkIfNotEmpty(listInputs["dateOfBirthElement"]);
-    valid &= checkIfNotEmpty(listInputs["startDateElement"]);
-
-    valid &= checkName(listInputs["cityElement"]);
-    valid &= checkName(listInputs["streetElement"]);
-
-    valid &= checkIfNotEmpty(listInputs["stateElement"]);
-    valid &= checkIfNotEmpty(listInputs["zipCodeElement"]);
-    valid &= checkIfNotEmpty(listInputs["departmentElement"]);
-
-    const employee = {
-        firstName: listInputs["firstNameElement"].value,
-        lastName: listInputs["lastNameElement"].value,
-        dateOfBirth: listInputs["dateOfBirthElement"].value,
-        startDate: listInputs["startDateElement"].value,
-        department: listInputs["departmentElement"].value,
-        street: listInputs["streetElement"].value,
-        city: listInputs["cityElement"].value,
-        state: listInputs["stateElement"].value,
-        zipCode: listInputs["zipCodeElement"].value,
-    }
-    return {valid, employee};
+    return valid;
 }
