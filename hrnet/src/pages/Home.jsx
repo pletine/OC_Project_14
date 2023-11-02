@@ -84,28 +84,38 @@ export default function Home() {
         <h2>Create Employee</h2>
         <form action="#" id="create-employee">
           <label htmlFor={firstName}>First Name</label>
-          <input type="text" id={firstName} />
+          <input type="text" id={firstName} data-testid="firstName" />
 
           <label htmlFor={lastName}>Last Name</label>
-          <input type="text" id={lastName} />
+          <input type="text" id={lastName} data-testid="lastName" />
 
           <label htmlFor={dateOfBirth}>Date of Birth</label>
-          <input id={dateOfBirth} type="date" name="last-name" />
+          <input
+            id={dateOfBirth}
+            type="date"
+            name="birth-date"
+            data-testid="birthDate"
+          />
 
           <label htmlFor={startDate}>Start Date</label>
-          <input id={startDate} type="date" name="start-date" />
+          <input
+            id={startDate}
+            type="date"
+            name="start-date"
+            data-testid="startDate"
+          />
 
           <fieldset className="address">
             <legend>Address</legend>
 
             <label htmlFor={street}>Street</label>
-            <input id={street} type="text" />
+            <input id={street} type="text" data-testid="street" />
 
             <label htmlFor={city}>City</label>
-            <input id={city} type="text" />
+            <input id={city} type="text" data-testid="city" />
 
             <label htmlFor={state}>State</label>
-            <select name="state" id={state}>
+            <select name="state" id={state} data-testid="state">
               <option value="">-- Select State --</option>
               <option value="AL">Alabama (AL)</option>
               <option value="AK">Alaska (AK)</option>
@@ -161,11 +171,11 @@ export default function Home() {
             </select>
 
             <label htmlFor={zipCode}>Zip Code</label>
-            <input id={zipCode} type="number" />
+            <input id={zipCode} type="number" data-testid="zipCode" />
           </fieldset>
 
           <label htmlFor={department}>Department</label>
-          <select name="department" id={department}>
+          <select name="department" id={department} data-testid="department">
             <option value="">-- Select Working Department --</option>
             <option value="Sales">Sales</option>
             <option value="Marketing">Marketing</option>
@@ -175,12 +185,14 @@ export default function Home() {
           </select>
         </form>
 
-        <button onClick={saveEmployee}>Save</button>
+        <button onClick={saveEmployee} data-testid="saveButton">
+          Save
+        </button>
       </div>
 
       <Modal onClose={() => setModal(false)} show={modal}>
         <h2>Inscription succeeded !</h2>
-        <p>Employee Created!</p>
+        <p>Employee Created !</p>
       </Modal>
     </div>
   );

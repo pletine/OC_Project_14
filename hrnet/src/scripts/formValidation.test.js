@@ -1,7 +1,5 @@
 import formValidation from './formValidation.js';
 
-// jest.mock(functions.insertAfter, () => {});
-
 const inputs = [
     { element: document.createElement("input"), type: "name" }, // FirstName
     { element: document.createElement("input"), type: "name" }, // LastName
@@ -12,10 +10,11 @@ const inputs = [
     { element: document.createElement("input"), type: "name" }, // City
     { element: document.createElement("input"), type: "value" }, // State
     { element: document.createElement("input"), type: "value" }, // ZipCode
+    { element: document.createElement("input"), type: "text" }, // Text test
+    { element: document.createElement("input"), type: "test" }, // Default test
 ];
 
 describe('The validation function', () => {
-    // console.log(functions);
     it("should succed if the inputs are full", () => {
         inputs[0].element.value = "John";
         inputs[1].element.value = "Doe";
@@ -26,6 +25,8 @@ describe('The validation function', () => {
         inputs[6].element.value = "City";
         inputs[7].element.value = "State";
         inputs[8].element.value = "12345";
+        inputs[9].element.value = "Text";
+        inputs[10].element.value = "Default";
 
         const valid = formValidation(inputs);
         expect(valid).toBe(true);
