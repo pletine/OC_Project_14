@@ -18,19 +18,15 @@ export default function EmployeeList() {
 
   const [employeesState, setEmployeesState] = useState(employees);
 
-  if (employeesState === null || employeesState.length === 0) {
-    return (
-      <div id="employee-div" className="container">
-        <h1>Current Employees</h1>
-        <p>No employees to display</p>
-        <Link to="/">Home</Link>
-      </div>
-    );
-  } else {
-    return (
-      <div id="employee-div" className="container">
-        <h1>Current Employees</h1>
+  const title = <h1>Current Employees</h1>;
+  const linkHome = <Link to="/">Home</Link>;
+  let content = null;
 
+  if (employeesState === null || employeesState.length === 0) {
+    content = <p>No employees to display</p>;
+  } else {
+    content = (
+      <>
         <button
           onClick={() => {
             dispatch(deleteAll());
@@ -39,10 +35,16 @@ export default function EmployeeList() {
         >
           Effacer les données
         </button>
-
         <DataTable dataInput={employeesState} />
-        <Link to="/">Home</Link>
-      </div>
+      </>
     );
   }
+
+  return (
+    <div id="employee-div" className="container">
+      {title}
+      {content}
+      {linkHome}
+    </div>
+  );
 }

@@ -13,47 +13,47 @@ export default function DataTable({ dataInput }) {
       {
         header: "First Name",
         accessorKey: "firstName",
-        size: 200,
+        size: 50,
       },
       {
         header: "Last Name",
         accessorKey: "lastName",
-        size: 200,
+        size: 50,
       },
       {
         header: "Start Date",
         accessorKey: "startDate",
-        size: 200,
+        size: 50,
       },
       {
         header: "Department",
         accessorKey: "department",
-        size: 200,
+        size: 50,
       },
       {
         header: "Date of Birth",
         accessorKey: "dateOfBirth",
-        size: 200,
+        size: 50,
       },
       {
         header: "Street",
         accessorKey: "street",
-        size: 200,
+        size: 50,
       },
       {
         header: "City",
         accessorKey: "city",
-        size: 200,
+        size: 50,
       },
       {
         header: "State",
         accessorKey: "state",
-        size: 200,
+        size: 50,
       },
       {
         header: "Zip Code",
         accessorKey: "zipCode",
-        size: 200,
+        size: 50,
       },
     ],
     []

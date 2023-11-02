@@ -147,6 +147,5 @@ export default function formValidation(listInputs) {
                 break;
         }
     });
-
-    return valid;
+    return Boolean(valid);
 }
