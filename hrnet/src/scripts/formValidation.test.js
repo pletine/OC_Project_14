@@ -1,5 +1,7 @@
 import formValidation from './formValidation.js';
 
+
+
 const inputs = [
     { element: document.createElement("input"), type: "name" }, // FirstName
     { element: document.createElement("input"), type: "name" }, // LastName
@@ -31,19 +33,4 @@ describe('The validation function', () => {
         const valid = formValidation(inputs);
         expect(valid).toBe(true);
     });
-
-    // it("should fail if the inputs are empty", () => {
-    //     inputs[0].element.value = "";
-    //     inputs[1].element.value = "";
-    //     inputs[2].element.value = "";
-    //     inputs[3].element.value = "";
-    //     inputs[4].element.value = "";
-    //     inputs[5].element.value = "";
-    //     inputs[6].element.value = "";
-    //     inputs[7].element.value = "";
-    //     inputs[8].element.value = "";
-
-    //     const valid = formValidation(inputs);
-    //     expect(valid).toBe(false);
-    // });
 });

@@ -3,7 +3,6 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom'
 import { store, addUser } from '../store';
 import EmployeeList from './EmployeeList';
-import { useDispatch } from "react-redux";
 
 describe('Employee List', () => {
     it("should contains the title", () => {

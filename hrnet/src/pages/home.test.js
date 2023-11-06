@@ -1,4 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom'
 import { store } from '../store.js';
@@ -43,30 +44,63 @@ describe('Employee List', () => {
 
 describe('Add Employee', () => {
     it("should add an employee", () => {
-        const firstNameElement = screen.getByTestId('firstName');
-        const lastNameElement = screen.getByTestId('lastName');
-        const dateOfBirthElement = screen.getByTestId('birthDate');
-        const startDateElement = screen.getByTestId('startDate');
-        const departmentElement = screen.getByTestId('department');
-        const streetElement = screen.getByTestId('street');
-        const cityElement = screen.getByTestId('city');
-        const stateElement = screen.getByTestId('state');
-        const zipCodeElement = screen.getByTestId('zipCode');
+        screen.getByTestId('firstName').value = "John";
+        screen.getByTestId('lastName').value = "Doe";
+        screen.getByTestId('birthDate').value = "2021-01-01";
+        screen.getByTestId('startDate').value = "2021-01-01";
+        screen.getByTestId('department').value = "Engineering";
+        screen.getByTestId('street').value = "Street";
+        screen.getByTestId('city').value = "City";
+        screen.getByTestId('state').value = "AL";
+        screen.getByTestId('zipCode').value = "123";
 
         const saveButton = screen.getByTestId("saveButton");
-
-        firstNameElement.value = "John";
-        lastNameElement.value = "Doe";
-        dateOfBirthElement.value = "2021-01-01";
-        startDateElement.value = "2021-01-01";
-        departmentElement.value = "Engineering";
-        streetElement.value = "Street";
-        cityElement.value = "City";
-        stateElement.value = "AL";
-        zipCodeElement.value = "123";
-
         fireEvent.click(saveButton);
         const modalTitle = screen.getByText('Inscription succeeded !');
         expect(modalTitle).toBeTruthy();
     })
+
+    it("should fail if inputs are empty", () => {
+        screen.getByTestId('firstName').value = "";
+        screen.getByTestId('lastName').value = "";
+        screen.getByTestId('birthDate').value = "";
+        screen.getByTestId('startDate').value = "";
+        screen.getByTestId('department').value = "";
+        screen.getByTestId('street').value = "";
+        screen.getByTestId('city').value = "";
+        screen.getByTestId('state').value = "";
+        screen.getByTestId('zipCode').value = "";
+
+        const saveButton = screen.getByTestId("saveButton");
+        fireEvent.click(saveButton);
+        const listErrorMessage = screen.queryAllByTestId("error-message");
+        expect(listErrorMessage.length).toBe(9);
+    });
+
+    it("should fail if inputs are missing, show error messages and hide messages when inputs are filled", () => {
+        screen.getByTestId('firstName').value = "";
+        screen.getByTestId('lastName').value = "";
+        screen.getByTestId('birthDate').value = "";
+        screen.getByTestId('startDate').value = "";
+        screen.getByTestId('department').value = "";
+        screen.getByTestId('street').value = "";
+        screen.getByTestId('city').value = "";
+        screen.getByTestId('state').value = "";
+        screen.getByTestId('zipCode').value = "";
+
+        const saveButton = screen.getByTestId("saveButton");
+        fireEvent.click(saveButton);
+        let listErrorMessage = screen.queryAllByTestId("error-message");
+        expect(listErrorMessage.length).toBe(9);
+
+        screen.getByTestId('firstName').value = "John5";
+        screen.getByTestId('lastName').value = "Doe";
+        fireEvent.click(saveButton);
+        expect(listErrorMessage[0]).toBeVisible();
+        expect(listErrorMessage[1]).not.toBeVisible();
+
+        screen.getByTestId('firstName').value = "John";
+        fireEvent.click(saveButton);
+        expect(listErrorMessage[0]).not.toBeVisible();
+    });
 });

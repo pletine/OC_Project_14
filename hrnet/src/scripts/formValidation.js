@@ -51,6 +51,7 @@ function printErrorMessage(element, texte) {
         let pError = document.createElement('p');
         pError.innerText = texte;
         pError.id = 'error_message' + element.id;
+        pError.setAttribute('data-testid', 'error-message');
         insertAfter(element, pError);
     }
 }
