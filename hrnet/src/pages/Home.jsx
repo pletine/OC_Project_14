@@ -190,7 +190,13 @@ export default function Home() {
         </button>
       </div>
 
-      <Modal onClose={() => setModal(false)} show={modal}>
+      <Modal
+        onClose={() => setModal(false)}
+        show={modal}
+        classNameModal="modalClass"
+        classModalContent="modalContentClass"
+        styleModal={{ backgroundColor: "green" }}
+      >
         <h2>Inscription succeeded !</h2>
         <p>Employee Created !</p>
       </Modal>
